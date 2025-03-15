@@ -1,11 +1,11 @@
 public class Entry {
-   public string _entry;
-    public string _date;
-    public string _prompt;
+   public string _entry { get; set; }
+    public string _date { get; set; }
+    public string _prompt { get; set; }
 
 
 
-    public void GetPrompt() {
+    public Entry() {
 
         Prompt prompts = new Prompt();
         prompts.AddPromptList("Who was the most interesting person I interacted with today?");
@@ -16,17 +16,15 @@ public class Entry {
         prompts.AddPromptList("If I had one thing I could do over today, what would it be?");
         
        _prompt = prompts.RamdomPrompt(prompts._prompts);
+       _date = DateTime.Now.ToString("dd/MM/yyyy");
 
     }
 
-    public void GetDate() {
-        _date = DateTime.Now.ToString("dd/MM/yyyy");
-    }
+
 
     public void Display() {
-        Console.WriteLine(_date);
-        Console.WriteLine(_prompt);
-        Console.WriteLine(_entry);
+        Console.WriteLine($"Date: {_date} - Prompt: {_prompt}");
+        Console.WriteLine($"Entry: {_entry}");
     }
 }
 

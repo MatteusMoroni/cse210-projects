@@ -1,16 +1,55 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
+    
     {
-        Entry entry = new Entry();
-        entry.GetPrompt();
-        entry.GetDate();
-        Console.WriteLine(entry._prompt);
-        String entryInput = Console.ReadLine();
-        entry._entry = entryInput;
-        entry.Display();
-     
+        string menuInput = "";
+        Journal journal = new Journal();
+        
+        string folderPath =  "https://github.com/MatteusMoroni/cse210-projects/tree/main/week02/Journal";
+
+        do{
+            Console.WriteLine("Please select one of the following choices: ");
+            Console.WriteLine("1. Entry");
+            Console.WriteLine("2. Display");
+            Console.WriteLine("3. Load");
+            Console.WriteLine("4. save");
+            Console.WriteLine("5. Exit");
+            Console.WriteLine("Enter your choice: ");
+            menuInput = Console.ReadLine();
+            switch (menuInput)
+            {
+                case "1":
+                       
+                    journal.AddEntry(new Entry());
+
+                    break;
+ 
+
+                case "2":
+                    journal.Display();
+                    break;
+      
+                case "3":
+                    await journal.LoadFile(folderPath);
+
+                    break;
+                case "4":
+                    journal.SaveFile(folderPath);
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid input. Please try again.");
+                    break;
+            }
+
+        } while (menuInput != "5");
+
     }
 }
