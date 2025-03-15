@@ -12,7 +12,7 @@ class Program
         string menuInput = "";
         Journal journal = new Journal();
         
-        string folderPath =  "https://github.com/MatteusMoroni/cse210-projects/tree/main/week02/Journal";
+        
 
         do{
             Console.WriteLine("Please select one of the following choices: ");
@@ -37,11 +37,11 @@ class Program
                     break;
       
                 case "3":
-                    await journal.LoadFile(folderPath);
+                    journal.LoadFile();
 
                     break;
                 case "4":
-                    journal.SaveFile(folderPath);
+                    journal.SaveFile();
                     break;
 
                 default:

@@ -4,8 +4,6 @@ using System.IO;
 using System.Text.Json;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using System.Net.Http;
-using System.Threading.Tasks;
 public class Journal {
     public List<Entry> _entries = new List<Entry>();
 
@@ -22,10 +20,11 @@ public class Journal {
         }
     }
 
-    public void SaveFile(string folderPath) {
+    public void SaveFile() {
         Console.WriteLine("What would you like to name your file?");
         string fileName = Console.ReadLine();
-        fileName = Path.Combine(folderPath, fileName);
+        fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+        
         
 
         if(!File.Exists(fileName)) {
@@ -49,24 +48,23 @@ public class Journal {
 
     }
 
-    public async Task LoadFile(string folderPath) {
+    public void LoadFile() {
         
         Console.WriteLine("What file would you like to load?");
         string fileNameImput = Console.ReadLine();
         string fileName = fileNameImput;
-        fileName = Path.Combine(folderPath, fileName);
-        using HttpClient client = new HttpClient();
-        string jsonResponse = await client.GetStringAsync(folderPath);
+        fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+        
 
         if(File.Exists(fileName)) {
-            string fileContent = await File.ReadAllTextAsync(fileName);
-            List<Entry> entries = JsonConvert.DeserializeObject<List<Entry>>(fileContent);
+            string jsonString = File.ReadAllText(fileName);
+            List<Entry> entries = JsonConvert.DeserializeObject<List<Entry>>(jsonString);
             _entries = entries;
             Console.WriteLine("File loaded successfully.");
 
         }
         else {
-            Console.WriteLine("File doesn't exists.");
+            Console.WriteLine($"File {fileName} doesn't exists.");
         }
     }
 }
