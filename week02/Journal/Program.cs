@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 class Program
 {
-    static async Task Main(string[] args)
-    
+    static void Main(string[] args)
+
     {
         string menuInput = "";
         Journal journal = new Journal();
-        
-        
 
-        do{
+
+
+        do
+        {
             Console.WriteLine("Please select one of the following choices: ");
             Console.WriteLine("1. Entry");
             Console.WriteLine("2. Display");
@@ -26,16 +27,13 @@ class Program
             switch (menuInput)
             {
                 case "1":
-                       
                     journal.AddEntry(new Entry());
-
                     break;
- 
 
                 case "2":
                     journal.Display();
                     break;
-      
+
                 case "3":
                     journal.LoadFile();
 
