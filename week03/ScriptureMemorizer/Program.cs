@@ -42,7 +42,7 @@ class Program
         Console.WriteLine("Press enter to continue or type 'quit' to exit.");
         input = Console.ReadLine();
 
-        scripture1.HideRandomWord(3);
+        scripture1.HideRandomWord(4);
         Console.Clear();
 
 
