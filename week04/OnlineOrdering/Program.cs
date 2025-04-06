@@ -25,9 +25,6 @@ class Program
         Console.WriteLine(order2.GetPackingLabel());
         Console.WriteLine( order2.GetShippingLabel());
         Console.WriteLine($"Total Price: $ {order2.GetTotalPrice()}");
-        
- 
-
 
     }
 }
