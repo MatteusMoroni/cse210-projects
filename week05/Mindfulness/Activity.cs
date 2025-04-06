@@ -17,26 +17,37 @@ public class Activity {
         int duration = int.Parse(input);
         SetDuration(duration);
         Console.WriteLine($"\n");
+        Console.Clear();
         Console.Write($"Get ready... ");
-        ShowCountdown(5);
+        ShowSpinner(4);
         Console.Write($"\n \n");
 
     }
-    public void SetDuration(int duration) {
+    protected void SetDuration(int duration) {
         _duration = duration;
     }
-    public void ShowSpinner(){
-        Console.WriteLine("Loading...");
-        for (int i = 0; i < 3; i++) {
-            Console.Write(".");
-            System.Threading.Thread.Sleep(1000); // Simulate loading time
+    public void ShowSpinner(int durationSeconds){
+         
+        string[] spinner = { "|", "/", "-", "\\" };
+        int spinnerIndex = 0;
+        int totalIterations = durationSeconds * 5; 
+
+        for (int i = 0; i < totalIterations; i++)
+        {
+            Console.Write(spinner[spinnerIndex]);
+            Thread.Sleep(200); 
+            Console.Write("\b"); 
+
+            spinnerIndex = (spinnerIndex + 1) % spinner.Length;
         }
-        Console.WriteLine("\n");
+        Console.Write("\b\b"); // backspace to erase the last character
     }
 
     public void DisplayEndingMessage() {
-        Console.WriteLine($"Well done!! \n You have completed another {_duration} seconds of the {_name} activity.");
-        ShowSpinner();
+        Console.WriteLine($"Well done!!");
+        ShowSpinner(5);
+        Console.WriteLine($"You have completed another {_duration} seconds of the {_name} activity.");
+        ShowSpinner(5);
     }
 
     public void ShowCountdown(int seconds) {
